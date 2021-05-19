@@ -137,4 +137,11 @@ export default {
     width: 600,
     id: ids => ids.join('/status/'),
   },
+  kaltura: {
+    regex: /(?:https?:\/\/)?(?:www\.)?(?:kaltura\.com)\/(?:\w|\.|\/)+(?:partner_id\/(\w+)\/uiconf_id\/(\w+))(?:\w|\.|\/)+(?:entry_id\/(\w+))(\/.*)?/,
+    embedUrl: 'https://cdnapisec.kaltura.com/p/<%= partner_id %>/embedPlaykitJs/uiconf_id/<%= uiconf_id %>?iframeembed=true&entry_id=<%= remote_id %>',
+    html: '<iframe height="320" style="width: 100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+    height: 320,
+    width: 580
+  }
 };

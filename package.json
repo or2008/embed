@@ -14,7 +14,7 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
-    "build:copy": "npm run build && cp -f /Users/developer/work/embed/dist/bundle.js /Users/developer/work/CreatorApp/Frontend/node_modules/@editorjs/embed/dist/bundle.js",
+    "build:copy": "npm run build && cp -f /Users/localcoin/work/embed/dist/bundle.js /Users/localcoin/work/CreatorApp/Frontend/node_modules/@or2008/embed/dist/bundle.js",
     "build:dev": "webpack --mode development --watch",
     "test": "mocha -r @babel/register -r ignore-styles --recursive ./test"
   },

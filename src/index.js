@@ -134,7 +134,6 @@ export default class Embed {
       return container;
     }
 
-    console.log('render!! should happen once');
     const { html } = Embed.services[this.data.service];
     const container = document.createElement('div');
     const caption = document.createElement('div');
@@ -229,8 +228,17 @@ export default class Embed {
     const { key: service, data: url } = event.detail;
 
     const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
-    const result = regex.exec(url).slice(1);
-    const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
+    let embed;
+    let result = regex.exec(url);
+
+    if (service === 'kaltura') {
+      embed = embedUrl.replace(/<\%\= partner\_id \%\>/g, result[1]);
+      embed = embed.replace(/<\%\= uiconf\_id \%\>/g, result[2]);
+      embed = embed.replace(/<\%\= remote\_id \%\>/g, result[3]);
+    }
+    else {
+      embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result.slice(1)))
+    }
 
     this.data = {
       service,

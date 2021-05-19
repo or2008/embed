@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   optimization: {
-    minimize: true
+    minimize: false
   },
   module: {
     rules: [
