@@ -1,14 +1,20 @@
 /* eslint-disable no-useless-escape */
 export default {
   vimeo: {
-    // regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
-    // regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
-    regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)\/?(embed)?(?:#t=[\d]+)?s?$)/,
+    regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
     html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
     height: 320,
     width: 580,
   },
+  vimeoLiveEvent: {
+    regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/event\/([^\/]\d+)\/?(embed)?(?:#t=[\d]+)?s?$)/,
+    embedUrl: 'https://vimeo.com/event/<%= remote_id %>/embed',
+    html: '<iframe style="width:100%;" height="320" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
+    height: 320,
+    width: 580,
+  },
+  // < div style="padding:56.25% 0 0 0;position:relative;" > <iframe src="https://vimeo.com/event/1690333/embed" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
   youtube: {
     regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)/,
     embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
