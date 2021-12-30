@@ -1,16 +1,16 @@
 /* eslint-disable no-useless-escape */
 export default {
-  vimeoLiveEvent: {
-    regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/event\/([^\/]\d+)\/?(embed)?(?:#t=[\d]+)?s?$)/,
-    embedUrl: 'https://vimeo.com/event/<%= remote_id %>/embed',
-    html: '<iframe style="width:100%;" height="320" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
-    height: 320,
-    width: 580,
-  },
   vimeo: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
     html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
+    height: 320,
+    width: 580,
+  },
+  vimeoLiveEvent: {
+    regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/event\/([^\/]\d+)\/?(embed)?(?:#t=[\d]+)?s?$)/,
+    embedUrl: 'https://vimeo.com/event/<%= remote_id %>/embed',
+    html: '<iframe style="width:100%;" height="320" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
     height: 320,
     width: 580,
   },
