@@ -202,6 +202,8 @@ export default class Embed {
    * @param {string} url - link source url
    */
   async fetchLinkData(url) {
+    if (this.config.fetchLinkData && isFunction(this.config.fetchLinkData)) return this.fetchLinkDataFromConfig(url);
+
     try {
       const { body } = await (ajax.get({
         url: this.config.endpoint,
@@ -211,6 +213,21 @@ export default class Embed {
       }));
 
       const metaData = body.meta;
+
+      this.data.meta = metaData;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  /**
+   * Sends to backend pasted url and receives link data
+   *
+   * @param {string} url - link source url
+   */
+  async fetchLinkDataFromConfig(url) {
+    try {
+      const metaData = await this.config.fetchLinkData(url);
 
       this.data.meta = metaData;
     } catch (error) {
@@ -350,3 +367,9 @@ export default class Embed {
     return true;
   }
 }
+
+// Utils
+
+function isFunction(functionToCheck) {
+  return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+ }
