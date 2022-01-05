@@ -202,8 +202,7 @@ export default class Embed {
    * @param {string} url - link source url
    */
   async fetchLinkData(url) {
-    if (this.config.fetchLinkData && isFunction(this.config.fetchLinkData)) return this.fetchLinkDataFromConfig(url);
-
+    if (url.includes('vimeo.com')) return this.fetchVimeoLinkData(url);
     try {
       const { body } = await (ajax.get({
         url: this.config.endpoint,
@@ -225,9 +224,24 @@ export default class Embed {
    *
    * @param {string} url - link source url
    */
-  async fetchLinkDataFromConfig(url) {
+  async fetchVimeoLinkData(url) {
     try {
-      const metaData = await this.config.fetchLinkData(url);
+      // res = await fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/event/1689293')
+      // await res.json()
+
+      const { body } = await (ajax.get({
+        url: `https://vimeo.com/api/oembed.json?url=${url}`
+      }));
+
+      console.log(body);
+      const metaData = {
+          title: body.title,
+          site_name: body.provider_name,
+          description: body.description,
+          image: {
+              url: body.thumbnail_url,
+          },
+      }
 
       this.data.meta = metaData;
     } catch (error) {
@@ -372,4 +386,4 @@ export default class Embed {
 
 function isFunction(functionToCheck) {
   return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
- }
+}
