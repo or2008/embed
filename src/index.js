@@ -229,14 +229,13 @@ export default class Embed {
       // res = await fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/event/1689293')
       // await res.json()
 
-      const { body } = await (ajax.get({
+      const { body } = await ajax.get({
         url: `https://vimeo.com/api/oembed.json?url=${url}`
-      }));
+      });
 
-      console.log(body);
       const metaData = {
           title: body.title,
-          site_name: body.provider_name,
+          site_name: 'Vimeo', // body.provider_name
           description: body.description,
           image: {
               url: body.thumbnail_url,
