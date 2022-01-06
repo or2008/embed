@@ -167,7 +167,7 @@ export default {
     id: (ids) => {
       return ids.join('/');
     },
-    height: 300
+    height: 320
   },
   aparat: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?aparat\.com\/v\/([^\/\?\&]+)\/?/,
