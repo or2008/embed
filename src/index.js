@@ -128,9 +128,7 @@ export default class Embed {
   render() {
     if (!this.data.service) {
       const container = document.createElement('div');
-
       this.element = container;
-
       return container;
     }
 
@@ -214,6 +212,7 @@ export default class Embed {
       const metaData = body.meta;
 
       this.data.meta = metaData;
+      return metaData;
     } catch (error) {
       console.error(error);
     }
@@ -254,7 +253,7 @@ export default class Embed {
    * @param {PasteEvent} event- event with pasted data
    * @returns {Service}
    */
-  onPaste(event) {
+  async onPaste(event) {
     const { key: service, data: url } = event.detail;
 
     const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
@@ -265,6 +264,10 @@ export default class Embed {
       embed = embedUrl.replace(/<\%\= partner\_id \%\>/g, result[1]);
       embed = embed.replace(/<\%\= uiconf\_id \%\>/g, result[2]);
       embed = embed.replace(/<\%\= remote\_id \%\>/g, result[3]);
+    }
+    else if (service === 'soundcloud') {
+      const linkData = await this.fetchLinkData(id(result.slice(1)));
+      embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, linkData.twitterUrl)
     }
     else {
       embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result.slice(1)))
